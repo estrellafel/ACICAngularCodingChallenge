@@ -4,14 +4,16 @@ import { Location } from '@angular/common';
 
 import { LineOfBusiness } from '../LineOfBusiness';
 import { LineOfBusinessService } from '../lineOfBusiness.service';
+import { RecentQuotes } from '../RecentQuotes';
 
 @Component({
   selector: 'app-lineOfBusiness-detail',
-  templateUrl: './lineOfBusiness-detail.component.html',
-  styleUrls: [ './lineOfBusiness-detail.component.css' ]
+  templateUrl: './lineOfBusiness-detail.component.html'
 })
 export class LineOfBusinessDetailComponent implements OnInit {
   lineOfBusiness: LineOfBusiness | undefined;
+  recentQuotes: RecentQuotes[] = []; // Array of recentQuotes
+  frequency: number = 0; // Number of quotes
 
   constructor(
     private route: ActivatedRoute,
@@ -25,8 +27,21 @@ export class LineOfBusinessDetailComponent implements OnInit {
 
   getLineOfBusiness(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
+    this.getRecentQuotes(id); // Call to add quotes to list
     this.lineOfBusinessService.getLineOfBusiness(id)
       .subscribe(lineOfBusiness => this.lineOfBusiness = lineOfBusiness);
+  }
+
+  /** Will count the number of occurances for a lineOfBusiness id*/ 
+  getRecentQuotes(id: number): void {
+    this.lineOfBusinessService.getRecentQuotes()
+      .subscribe(recentQuotes => {
+        recentQuotes.forEach(quote => {
+          if (quote.lineOfBusiness == id) {
+            this.frequency++;
+          }
+        })
+      })
   }
 
   goBack(): void {

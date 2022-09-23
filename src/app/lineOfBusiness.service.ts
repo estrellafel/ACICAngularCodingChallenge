@@ -6,12 +6,14 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { LineOfBusiness } from './LineOfBusiness';
 import { MessageService } from './message.service';
+import { RecentQuotes } from './RecentQuotes'; // Allow for RecentQuotes interface to be used
 
 
 @Injectable({ providedIn: 'root' })
 export class LineOfBusinessService {
 
   private lineOfBusinessUrl = 'api/linesOfBusiness';  // URL to web api
+  private recentQuotesUrl = 'api/recentQuotes'; // URL to the recent qoutes
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -51,6 +53,18 @@ export class LineOfBusinessService {
       tap(_ => this.log(`fetched lineOfBusiness id=${id}`)),
       catchError(this.handleError<LineOfBusiness>(`getLineOfBusiness id=${id}`))
     );
+  }
+
+  /** GET recent quotes from the server. 
+   * Use the httpclient to get the RecentQuotes that have been entered
+   * by the api. Will return an array of RecentQuotes.
+  */
+  getRecentQuotes(): Observable<RecentQuotes[]> {
+    return this.http.get<RecentQuotes[]>(this.recentQuotesUrl)
+      .pipe(
+        tap(_ => this.log('fetched recent quotes')),
+        catchError(this.handleError<RecentQuotes[]>('getRecentQuotes', []))
+      );
   }
 
   /* GET lines of business whose name contains search term */
