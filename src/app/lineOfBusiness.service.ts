@@ -55,9 +55,12 @@ export class LineOfBusinessService {
     );
   }
 
-  /** GET recent quotes from the server. 
+  /** 
+   * GET recent quotes from the server. 
    * Use the httpclient to get the RecentQuotes that have been entered
    * by the api. Will return an array of RecentQuotes.
+   * 
+   * @returns {RecentQuotes[]} - List of all recent quotes from recentQuotesUrl
   */
   getRecentQuotes(): Observable<RecentQuotes[]> {
     return this.http.get<RecentQuotes[]>(this.recentQuotesUrl)

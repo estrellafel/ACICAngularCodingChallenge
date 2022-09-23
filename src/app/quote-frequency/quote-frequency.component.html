@@ -1,7 +1,7 @@
 <h2 *ngIf="topTwo.length != 0">Top Two Lines of Business</h2>
-<div class="linesOfBusiness-menu">
-  <button *ngFor="let lineOfBusiness of topTwo"
+<div class="topTwo-links">
+  <a *ngFor="let lineOfBusiness of topTwo"
     routerLink="/detail/{{lineOfBusiness.id}}">
     {{lineOfBusiness.name}}
-  </button>
+  </a>
 </div>

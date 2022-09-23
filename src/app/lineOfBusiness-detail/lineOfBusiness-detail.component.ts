@@ -32,7 +32,12 @@ export class LineOfBusinessDetailComponent implements OnInit {
       .subscribe(lineOfBusiness => this.lineOfBusiness = lineOfBusiness);
   }
 
-  /** Will count the number of occurances for a lineOfBusiness id*/ 
+  /** 
+   * Will count the number of occurances for a lineOfBusiness id and
+   * store that value in frequency.
+   * 
+   * @param {number} - id corresponding to line of business id
+   * */ 
   getRecentQuotes(id: number): void {
     this.lineOfBusinessService.getRecentQuotes()
       .subscribe(recentQuotes => {

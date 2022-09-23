@@ -27,7 +27,7 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 108, quoteNumber: 'AC127PC', lineOfBusiness: 15 }
     ];
 
-    return {linesOfBusiness, recentQuotes}; // Also return recentQuote
+    return {linesOfBusiness, recentQuotes}; // Also return recentQuotes list
   }
 
   // Overrides the genId method to ensure that a line of business always has an id.
