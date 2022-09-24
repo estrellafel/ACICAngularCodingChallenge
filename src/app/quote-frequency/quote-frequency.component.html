@@ -1,4 +1,4 @@
-<h2 *ngIf="topTwo.length != 0">Top Two Lines of Business</h2>
+<h2 *ngIf="topTwo.length != 0">Most Quoted Lines of Business</h2>
 <div class="topTwo-links">
   <a *ngFor="let lineOfBusiness of topTwo"
     routerLink="/detail/{{lineOfBusiness.id}}">
